@@ -1,11 +1,11 @@
 use std::{
     collections::HashMap,
     env::current_dir,
-    fs::{self, canonicalize, read_to_string},
-    path::{self, PathBuf},
+    fs::{self, canonicalize},
+    path::PathBuf,
 };
 
-use clap::{Error, Parser, Subcommand};
+use clap::{Parser, Subcommand};
 use directories::ProjectDirs;
 use serde::{Deserialize, Serialize};
 
@@ -35,11 +35,14 @@ struct Dictionary {
 }
 
 impl Dictionary {
-    fn set(&mut self, name: &String, path: PathBuf) -> Option<PathBuf> {
-        self.items.insert(name.clone(), path)
+    fn set(&mut self, name: &str, path: PathBuf) -> Option<PathBuf> {
+        self.items.insert(name.to_string(), path)
     }
     fn get(&self, name: &String) -> Option<&PathBuf> {
         self.items.get(name)
+    }
+    fn get_all(&self) -> HashMap<String, PathBuf> {
+        self.items.clone()
     }
 }
 
@@ -52,7 +55,7 @@ fn get_config_path() -> PathBuf {
 fn fetch_config_file() -> Dictionary {
     let config_path = get_config_path();
     let _ = fs::create_dir_all(config_path.parent().unwrap());
-    if (!config_path.exists()) {
+    if !config_path.exists() {
         Dictionary::default()
     } else {
         let raw_data = fs::read_to_string(config_path).unwrap();
@@ -84,6 +87,18 @@ fn main() {
         Some(Commands::Get { name }) => {
             if let Some(result_path) = dictionary.get(name) {
                 println!("{}", result_path.to_str().unwrap());
+            }
+        }
+        Some(Commands::List {}) => {
+            let data = dictionary.get_all();
+            for (key, value) in data.into_iter() {
+                println!(
+                    "[{key}] {}",
+                    value
+                        .into_os_string()
+                        .into_string()
+                        .expect("Path Parsing Error")
+                );
             }
         }
         _ => {}
