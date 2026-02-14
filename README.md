@@ -76,12 +76,20 @@ tp() {
     fi
 }
 ```
-### tp command usage
+### 'tp' command usage
 ```
 # Before this command, "work" must be subscribed ( pd set work [path] ).
 tp work
 ```
 
-
-
+## (Tip) You can also edit dictionary manually 
+All of the dictionary data is saved in "~/.config/pd/pd.toml".
+As this is a simple toml file, you can easily edit it directly if needed.
+This can be helpful if you want to delete or add a series of paths.
+### An example of pd.toml
+```
+[items]
+c = "/mnt/c"
+nvim = "/home/joseph/.config/nvim"
+```
 
