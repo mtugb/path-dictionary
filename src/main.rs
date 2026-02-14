@@ -1,7 +1,7 @@
 use std::{
     collections::HashMap,
     env::current_dir,
-    fs::{self, canonicalize},
+    fs::{self},
     path::PathBuf,
 };
 
@@ -76,10 +76,10 @@ fn main() {
         Some(Commands::Set { name, path }) => {
             // something here
             if let Some(p) = path {
-                let pb = PathBuf::from(p);
+                let pb = dunce::canonicalize(p).unwrap();
                 dictionary.set(name, pb);
             } else {
-                let pd = canonicalize(current_dir().unwrap()).unwrap();
+                let pd = dunce::canonicalize(current_dir().unwrap()).unwrap();
                 dictionary.set(name, pd);
             }
             put_config_file(dictionary);
