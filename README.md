@@ -1,3 +1,11 @@
+```
+    ____        __  __       ____  _      __  _
+   / __ \____ _/ /_/ /_     / __ \(_)____/ /_(_)___  ____  ____ ________  __
+  / /_/ / __ `/ __/ __ \   / / / / / ___/ __/ / __ \/ __ \/ __ `/ ___/ / / /
+ / ____/ /_/ / /_/ / / /  / /_/ / / /__/ /_/ / /_/ / / / / /_/ / /  / /_/ /
+/_/    \__,_/\__/_/ /_/  /_____/_/\___/\__/_/\____/_/ /_/\__,_/_/   \__, /
+                                                                   /____/
+```
 # Path Dictionary
 ---
 PD ( Path Disctionary ) is a command-line tool that allow you to:
@@ -8,9 +16,9 @@ PD ( Path Disctionary ) is a command-line tool that allow you to:
 ## Features
 - Easy to use
 - Out-of-the-box access
-- Flexible custumizability
+- Flexible customizability
 
-## Install via CURL command (Ubuntu)
+## Install via curl command (Ubuntu)
 ```bash
 curl -L https://github.com/mtugb/path-dictionary/releases/latest/download/pd -o pd
 chmod +x pd
