@@ -6,9 +6,8 @@
 /_/    \__,_/\__/_/ /_/  /_____/_/\___/\__/_/\____/_/ /_/\__,_/_/   \__, /
                                                                    /____/
 ```
-# Path Dictionary
 ---
-PD ( Path Disctionary ) is a command-line tool that allow you to:
+PD ( Path Dictionary ) is a minimalist command-line tool that allow you to:
 - save your filepath/dirpath in dictionary
 - seek your path in dictionary
 - list all paths in dictionary
@@ -17,15 +16,20 @@ PD ( Path Disctionary ) is a command-line tool that allow you to:
 - Easy to use
 - Out-of-the-box access
 - Flexible customizability
+- No magic but powerful
 
 ## Install via curl command (Ubuntu)
 ```bash
+# Fetch binary and put on eligible place
 curl -L https://github.com/mtugb/path-dictionary/releases/latest/download/pd -o pd
 chmod +x pd
 mkdir -p ~/bin
-mv pd ~/bin/
-echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
+mv -f pd ~/bin/
+# If necessary, add one required line to ~/.bashrc
+if ! grep -q '~/bin' ~/.bashrc; then
+  echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+  echo "Path added to .bashrc. Please restart your shell or run 'source ~/.bashrc'."
+fi
 ```
 
 ## Usage
@@ -44,7 +48,7 @@ $HOME (current location)
 # Set path to the dictionary
 pd set my-app ./projects/my-app
 
-# Look up the path you just subsceibed
+# Look up the path you just subscribed
 pd get my-app #output: /home/user/project/my-app
 
 # List dictionary
